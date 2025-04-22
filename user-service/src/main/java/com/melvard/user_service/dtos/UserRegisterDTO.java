@@ -1,4 +1,4 @@
-package io.github.melihvardar.dtos.user;
+package com.melvard.user_service.dtos;
 
 import io.github.melihvardar.enums.Role;
 import jakarta.validation.constraints.Email;

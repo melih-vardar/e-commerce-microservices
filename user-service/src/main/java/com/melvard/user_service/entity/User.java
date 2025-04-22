@@ -1,5 +1,6 @@
 package com.melvard.user_service.entity;
 
+import io.github.melihvardar.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +22,7 @@ public class User {
     private UUID id;
 
     @Column(nullable = false, unique = true)
-    private String username;
+    private String email;
 
     @Column(nullable = false)
     private String password;
@@ -31,9 +32,6 @@ public class User {
 
     @Column(name = "last_name")
     private String lastName;
-
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
 
     @Enumerated(EnumType.STRING)
     private Role role;
