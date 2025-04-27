@@ -36,6 +36,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
     private Address address;
 
     @Column(name = "phone_number")

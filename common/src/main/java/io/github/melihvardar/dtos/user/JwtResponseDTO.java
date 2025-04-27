@@ -1,6 +1,5 @@
 package io.github.melihvardar.dtos.user;
 
-import com.melvard.user_service.dtos.UserResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

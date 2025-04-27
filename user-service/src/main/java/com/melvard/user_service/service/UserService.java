@@ -1,10 +1,12 @@
 package com.melvard.user_service.service;
 
+import java.util.List;
 import java.util.UUID;
 
-import com.melvard.user_service.dtos.JwtResponseDTO;
-import com.melvard.user_service.dtos.UserRegisterDTO;
-import com.melvard.user_service.dtos.UserResponseDTO;
+import io.github.melihvardar.dtos.user.JwtResponseDTO;
+import io.github.melihvardar.dtos.user.UserRegisterDTO;
+import io.github.melihvardar.dtos.user.UserResponseDTO;
+import io.github.melihvardar.dtos.user.UserLoginDTO;
 
 public interface UserService {
 
@@ -17,4 +19,8 @@ public interface UserService {
     void deleteUser(UUID id);
 
     JwtResponseDTO register(UserRegisterDTO userRegisterDTO);
+
+    JwtResponseDTO login(UserLoginDTO userLoginDTO);
+
+    List<UserResponseDTO> getAllUsers();
 }
