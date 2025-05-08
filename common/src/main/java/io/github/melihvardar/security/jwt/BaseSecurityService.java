@@ -16,7 +16,7 @@ public class BaseSecurityService {
 //            "/v2/api-docs",
 //            "/v3/api-docs",
 //            "/v3/api-docs/**",
-            "/api/auth/**",
+//            "/api/auth/**",
 //            "/actuator/health/**",
 //            "/actuator/health",
 //            "/actuator/info",
@@ -39,7 +39,6 @@ public class BaseSecurityService {
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(req -> req.requestMatchers(WHITE_LIST_URLS).permitAll())
                 .addFilterBefore(baseJwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         log.debug("Core security configuration completed");

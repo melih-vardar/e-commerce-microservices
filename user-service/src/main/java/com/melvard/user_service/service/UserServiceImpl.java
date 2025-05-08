@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public JwtResponseDTO register(UserRegisterDTO userRegisterDTO) {
-        businessRules.checkIfUserExistsByEmail(userRegisterDTO.getEmail());
+        businessRules.checkIfEmailExists(userRegisterDTO.getEmail());
 
         User user = User.builder()
                 .email(userRegisterDTO.getEmail())
@@ -117,13 +117,17 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserResponseDTO updateUser(UUID id, UserRegisterDTO userRegisterDTO) {
         businessRules.checkIfUserExistsById(id);
-        businessRules.checkIfEmailExists(userRegisterDTO.getEmail());
 
         User user = userRepository.findById(id).get();
 
+        if (!user.getEmail().equals(userRegisterDTO.getEmail())) {
+            businessRules.checkIfEmailExists(userRegisterDTO.getEmail());
+            user.setEmail(userRegisterDTO.getEmail());
+        }
+
         user.setEmail(userRegisterDTO.getEmail());
-        if (!user.getPassword().equals(userRegisterDTO.getPassword())) {
-            user.setPassword(userRegisterDTO.getPassword());
+        if (!passwordEncoder.matches(userRegisterDTO.getPassword(), user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
         }
 
         userRepository.save(user);
