@@ -1,13 +1,13 @@
 services:
-  postgres5432:
+  postgres5433:
     image: postgres:latest
-    container_name: postgres5432
+    container_name: postgres5433
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: user-service
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres5432_data:/var/lib/postgresql/data
     healthcheck:
@@ -22,9 +22,10 @@ services:
       dockerfile: Dockerfile
     container_name: user-service
     depends_on:
-      postgres5432:
+      postgres5433:
         condition: service_healthy
     environment:
+      - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres5432:5432/user-service
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
@@ -33,4 +34,4 @@ services:
     restart: always
 
 volumes:
-  postgres5432_data:
+  postgres5433_data:

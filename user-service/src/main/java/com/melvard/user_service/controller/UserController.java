@@ -18,12 +18,12 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{id}")
-    //@PreAuthorize("hasRole('USER')")
+    // @PreAuthorize("hasRole('USER')")
     public ResponseEntity<UserResponseDTO> getUserById(@PathVariable UUID id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<UserResponseDTO> getUserByEmail(@PathVariable String email) {
         return ResponseEntity.ok(userService.getUserByEmail(email));
     }
@@ -34,7 +34,8 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponseDTO> updateUser(@PathVariable UUID id, @Valid @RequestBody UserRegisterDTO userRegisterDTO){
+    public ResponseEntity<UserResponseDTO> updateUser(@PathVariable UUID id,
+            @Valid @RequestBody UserRegisterDTO userRegisterDTO) {
         return ResponseEntity.ok(userService.updateUser(id, userRegisterDTO));
     }
 
@@ -45,7 +46,8 @@ public class UserController {
     }
 
     @GetMapping("/test")
-    public String test() {return "User Service is working";}
-
+    public String test() {
+        return "User Service is working";
+    }
 
 }

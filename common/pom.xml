@@ -6,7 +6,7 @@
 
 <groupId>io.github.melih-vardar</groupId>
 <artifactId>e-commerce-microservices-common</artifactId>
-<version>1.0.3</version>
+<version>1.0.4</version>
 <packaging>jar</packaging>
 
 <name>e-commerce-microservices-common</name>
