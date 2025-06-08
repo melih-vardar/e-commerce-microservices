@@ -1,6 +1,6 @@
 spring:
   application:
-    name: userservice
+    name: categoryservice
   profiles:
     active: local
   jpa:
@@ -17,21 +17,13 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
 
-springdoc:
-  api-docs:
-    path: /api-docs
-  swagger-ui:
-    path: /swagger-ui/index.html
-    operationsSorter: method
-    disable-swagger-default-url: true
-
 ---
 spring:
   config:
     activate:
       on-profile: docker
   datasource:
-    url: jdbc:postgresql://postgres5433:5433/user-service
+    url: jdbc:postgresql://postgres5434:5434/category-service
     username: postgres
     password: postgres
 
@@ -41,9 +33,9 @@ spring:
     activate:
       on-profile: local
   datasource:
-    url: jdbc:postgresql://localhost:5433/user-service
+    url: jdbc:postgresql://localhost:5434/category-service
     username: postgres
     password: postgres
 
 server:
-  port: 8010
+  port: 8020

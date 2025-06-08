@@ -1,4 +1,6 @@
 services:
+#  DATABASES
+#  User service database
   postgres5433:
     image: postgres:latest
     container_name: postgres5433
@@ -16,6 +18,26 @@ services:
       timeout: 5s
       retries: 5
 
+      # Category service database
+  postgres5434:
+    image: postgres:latest
+    container_name: postgres5434
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: category-service
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres5434_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+# Services
+
   user-service:
     build:
       context: ./user-service
@@ -26,12 +48,31 @@ services:
         condition: service_healthy
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres5432:5432/user-service
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres5433:5433/user-service
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
     ports:
-      - "8080:8080"
+      - "8010:8010"
     restart: always
+
+  category-service:
+    build:
+      context: ./category-service
+      dockerfile: Dockerfile
+    container_name: category-service
+    depends_on:
+      postgres5434:
+        condition: service_healthy
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres5434:5434/category-service
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    ports:
+      - "8020:8020"
+    restart: always
+
 
 volumes:
   postgres5433_data:
+  postgres5434_data:

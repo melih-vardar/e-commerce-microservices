@@ -14,14 +14,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <processorPath>
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
         <module name="cart-service" />
+        <module name="category-service" />
         <module name="discovery-server" />
         <module name="review-service" />
-        <module name="product-service" />
         <module name="gateway-server" />
+        <module name="product-service" />
         <module name="user-service" />
         <module name="order-service" />
         <module name="billing-service" />
@@ -32,6 +33,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="billing-service" options="-parameters" />
       <module name="cart-service" options="-parameters" />
+      <module name="category-service" options="-parameters" />
       <module name="common" options="" />
       <module name="discovery-server" options="-parameters" />
       <module name="gateway-server" options="-parameters" />
